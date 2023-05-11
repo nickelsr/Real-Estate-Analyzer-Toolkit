@@ -1,0 +1,6 @@
+.form {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  max-width: 50rem;
+  margin: 5rem auto;
+}

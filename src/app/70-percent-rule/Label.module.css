@@ -1,0 +1,36 @@
+.label {
+  margin-bottom: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--clr-gray-charcoal);
+}
+
+.tooltip {
+  height: 1.1rem;
+  width: 1.1rem;
+  margin-left: 0.4rem;
+  text-align: center;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  line-height: 1.1rem;
+  border-radius: 50%;
+  background-color: var(--clr-gray-philippine);
+  color: white;
+  cursor: pointer;
+}
+
+.required::after {
+  content: "*";
+  color: red;
+}
+
+.popout {
+  max-width: 500px;
+  padding: 8px 16px;
+  position: absolute;
+  bottom: 2rem;
+  border-radius: 5px;
+  background-color: var(--clr-gray-bright);
+  color: var(--clr-text);
+}
