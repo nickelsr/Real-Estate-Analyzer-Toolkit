@@ -11,21 +11,69 @@
   --line-height-xl: 1.75rem;
   --clr-gray-x11: #bbb;
   --clr-gray-bright: #eee;
+  --clr-gray-bright-transparent: hsl(0, 0%, 93% / 90%);
+  --clr-gray-bright-lt: #fdfdfd;
+  --clr-gray-bright-dk: #d6d6d6;
+  --clr-gray-bright-lt-transparent: hsl(0 0% 99% / 80%);
   --clr-gray-philippine: #8c8c8c;
   --clr-gray-charcoal: #333;
+  --clr-gray-charcoal-lt: #5c5c5c;
+  --clr-gray-charcoal-dk: #1a1a1a;
   --clr-gray-argent: #c0c0c0;
+  --clr-slate-lt: #f1f2f4;
   /* color scheme webdesign */
   --clr-bg: #ffffff;
   --clr-text: #0f1112;
   --clr-accent1: #181c1f;
   --clr-accent2-: #22272b;
   /* color scheme webdesign end */
+  --clr-turquoise: #36b79f;
+  --clr-turquoise-lt: #c8f3fa;
+  --clr-palatinate-blue: #3d4cd9;
+  --clr-button-blue: #249ef0;
+  --clr-royal-blue: #435cd9;
+  --clr-pigment-blue: #422da8;
+  --blue-accent: #89b2ff;
+  --blue-accent-lt: #dce8ff;
+  --blue-accent-dk: #002976;
+  --gray-accent-lt: #f9f9f9;
+  --gold-lt: #fcd847;
+  --gold: #fbcb07;
+  --gold-dk: #deb304;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 1px blue;
+}
+
+.page-content {
+  width: 100%;
+  padding: 4rem;
+}
+
+.nav-section {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0 0.5rem;
 }
 
 .text-field-wrapper {
@@ -38,7 +86,7 @@
 
 .text-field {
   width: 300px;
-  height: 3.5rem;
+  height: 3rem;
   font: inherit;
   padding: 0.6rem 3rem 0.6rem 2rem;
   border-radius: 7px;
@@ -77,11 +125,12 @@
 }
 
 .button {
+  width: max-content;
   font-size: inherit;
   appearance: none;
-  border: 1px solid #fcd847;
+  border: none;
   border-radius: 7px;
-  background-color: #fcd847;
+  background-color: var(--gold-lt);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
   margin: 32px 0;
   padding: 12px 24px;
@@ -89,14 +138,29 @@
 }
 
 .button:hover {
-  background-color: #f3c407;
+  background-color: var(--gold);
+}
+
+.button:active {
+  background-color: var(--gold-dk);
 }
 
 .text-field:focus,
 .text-field:focus-visible,
 .button:focus,
 .button:focus-visible {
-  border-color: rgb(54, 183, 159);
-  box-shadow: inset 0 0 0 2px #fff, 0 0 0 3px #c8f3fa;
+  border-color: var(--clr-turquoise);
+  box-shadow: inset 0 0 0 2px #fff, 0 0 0 3px var(--clr-turquoise-lt);
   outline: none;
+}
+
+.a-page {
+  padding: 0 3rem;
+}
+
+.a-flex-container {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 3rem;
+  justify-content: space-between;
 }

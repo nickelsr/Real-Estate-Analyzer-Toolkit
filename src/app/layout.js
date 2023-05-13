@@ -1,12 +1,19 @@
+import Header from "./components/Header/Header";
 import "./globals.css";
 import { Pontano_Sans } from "next/font/google";
 
-const montserrat = Pontano_Sans({ subsets: ["latin"] });
+const pontano_sans = Pontano_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>{children}</body>
+      <body className={pontano_sans.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

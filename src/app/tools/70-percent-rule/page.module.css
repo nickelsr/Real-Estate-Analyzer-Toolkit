@@ -1,0 +1,21 @@
+.heading {
+  text-align: center;
+}
+
+.form {
+  max-width: 60rem;
+  margin: auto;
+  padding: 0 3rem;
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 3rem;
+  justify-content: space-between;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-md);
+}
+
+@media screen and (max-width: 48rem) {
+  .form {
+    display: block;
+  }
+}
