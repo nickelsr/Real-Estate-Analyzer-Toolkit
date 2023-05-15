@@ -1,0 +1,28 @@
+.breadcrumbs {
+  padding: 8px;
+  background-color: var(--clr-gray-bright);
+  border: 1px solid var(--clr-gray-charcoal-lt);
+
+  ul {
+    list-style: none;
+    display: flex;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  a:hover,
+  a:active {
+    color: var(--blue-accent-dk);
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+
+  li:not(:first-child)::before {
+    content: "→";
+    color: var(--clr-gray-charcoal);
+    padding: 0 16px;
+  }
+}

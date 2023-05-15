@@ -6,7 +6,8 @@
       "@app/*": ["./src/app/*"],
       "@components/*": ["./src/app/components/*"],
       "@styles/*": ["./src/styles/*"],
-      "@animations/*": ["./src/styles/animations/*"]
+      "@animations/*": ["./src/styles/animations/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   }
 }
