@@ -16,16 +16,11 @@ export default function Header() {
   const path = usePathname()
     .split("/")
     .filter(p => p !== "");
-  console.log(path);
   for (let p of path) {
-    console.log(p);
-    console.log(pathBuilder);
     pathBuilder += p;
-    console.log(pathBuilder);
     paths.push({ slug: pathBuilder, name: p.replaceAll("-", " ") });
     pathBuilder += "/";
   }
-  console.log(paths);
 
   useEffect(() => {
     let elem;
