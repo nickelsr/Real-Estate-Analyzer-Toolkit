@@ -80,8 +80,8 @@ export default function SeventyPercentRule() {
     }
 
     setMaxAllowableOffer(Math.round(maxAllowableOffer));
-    setRenovationCost(renovations);
-    setMargin(margin);
+    setRenovationCost(Math.round(renovations));
+    setMargin(Math.round(margin));
   }
 
   return (
