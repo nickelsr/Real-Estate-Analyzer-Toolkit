@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import Link from "next/link";
-import styles from "./MainNav.module.scss";
-import useNavDir from "@hooks/use-nav-dir";
 import { navLinks } from "@app/config";
+import useNavDir from "@hooks/use-nav-dir";
 import MainNavLink from "./MainNavLink";
+import styles from "./MainNav.module.scss";
 
 export default function MainNav() {
   const navDir = useNavDir();
@@ -27,15 +26,12 @@ export default function MainNav() {
     >
       <div className={styles["nav-section"]}>
         <ul>
-          <li>
-            <Link
-              className={styles.nav_link}
-              id="home-logo"
-              href="/"
-            >
-              <span>Logo Placeholder</span>
-            </Link>
-          </li>
+          <MainNavLink
+            className={styles.nav_link}
+            id="home-logo"
+            name="Logo Placeholder"
+            url="/"
+          />
           {navLinks.map(link => (
             <MainNavLink
               key={`nav-link-${link.url}`}
@@ -43,29 +39,22 @@ export default function MainNav() {
               name={link.name}
               url={link.url}
               nestedLinks={link.nestedLinks}
-              className={styles.nav_link}
             />
           ))}
         </ul>
       </div>
       <div className={styles["nav-section"]}>
         <ul>
-          <li>
-            <Link
-              className={`${styles.nav_link} ${styles.login}`}
-              href="/login"
-            >
-              <span>Login</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              className={`${styles.nav_link} ${styles.signup}`}
-              href="/sign-up"
-            >
-              <span>Sign Up</span>
-            </Link>
-          </li>
+          <MainNavLink
+            className={`${styles.nav_link} ${styles.login}`}
+            name="Login"
+            url="/login"
+          />
+          <MainNavLink
+            className={`${styles.nav_link} ${styles.signup}`}
+            name="Sign Up"
+            url="/sign-up"
+          />
         </ul>
       </div>
     </nav>

@@ -1,12 +1,14 @@
 .nav {
   height: 4rem;
   width: 100%;
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   color: white;
   background: var(--clr-gray-charcoal-dk);
   border: 1px solid var(--clr-gray-charcoal-lt);
+  z-index: 100;
 }
 
 .nav-section {
@@ -23,36 +25,6 @@
     height: 100%;
     list-style: none;
   }
-
-  li {
-    position: relative;
-    display: flex;
-    flex-flow: column nowrap;
-  }
-}
-
-.nav_link {
-  position: relative;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border-radius: 3px;
-  color: white;
-  font-weight: 600;
-  transition: all 100ms ease-in-out;
-  border: 1px solid transparent;
-
-  span {
-    padding: 0.5rem;
-  }
-
-  &:hover,
-  &:active,
-  &:focus,
-  &:focus-visible {
-    box-shadow: 0 0 0 3px var(--clr-gray-charcoal-dk), 0 0 0 4px white;
-  }
 }
 
 .signup {
@@ -67,10 +39,6 @@
     border-color: white;
     box-shadow: none;
   }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px var(--clr-gray-charcoal-dk), 0 0 0 4px white;
-  }
 }
 
 .login {
@@ -83,54 +51,6 @@
     background-color: var(--clr-gray-charcoal-dk);
     border-color: white;
     box-shadow: none;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px var(--clr-gray-charcoal-dk), 0 0 0 4px white;
-  }
-}
-
-.nav_dropdown {
-  width: max-content;
-  position: absolute;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 8px 0;
-  border: none;
-  border-radius: 3px;
-  top: calc(100% + 16px);
-  background-color: white;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.4);
-
-  span {
-    color: black;
-  }
-
-  ul {
-    display: flex;
-    flex-flow: column nowrap;
-    list-style: none;
-  }
-
-  a {
-    width: 100%;
-    padding: 8px 4px;
-  }
-
-  a:hover {
-    background-color: var(--blue-accent-lt);
-  }
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -16px;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 16px);
-    background-color: transparent;
   }
 }
 

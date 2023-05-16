@@ -1,54 +1,78 @@
-import { useRef, useState } from "react";
 import Link from "next/link";
-import { CSSTransition } from "react-transition-group";
-import fade from "@animations/fade.module.scss";
+import Dropdown from "./Dropdown";
 import styles from "./MainNavLink.module.scss";
+import { useState } from "react";
 
+const initialState = { hover: false, focus: false };
 export default function MainNavLink({ id, url, name, nestedLinks, className }) {
-  const [isVisibleDropdown, setIsVisibleDropdown] = useState(false);
-  const transitionRef = useRef(null);
+  const [dropdown, setDropdown] = useState(initialState);
 
-  const dropdown = (
-    <CSSTransition
-      in={isVisibleDropdown}
-      nodeRef={transitionRef}
-      classNames={{ ...fade }}
-      timeout={50}
-      mountOnEnter
-      unmountOnExit
-    >
-      <div
-        ref={transitionRef}
-        className={styles.nav_dropdown}
-      >
-        <ul>
-          {nestedLinks.map(link => (
-            <li key={`nav-link-${link.url}`}>
-              <Link href={link.url}>
-                <span>{link.name}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </CSSTransition>
-  );
+  const handleMouseEnter = () => {
+    setDropdown(state => {
+      const newState = { ...state };
+      newState.hover = true;
+      return newState;
+    });
+  };
 
-  const classes = className ? className : "";
+  const handleMouseLeave = () => {
+    setDropdown(state => {
+      const newState = { ...state };
+      newState.hover = false;
+      return newState;
+    });
+  };
+
+  const handleFocus = () => {
+    setDropdown(state => {
+      const newState = { ...state };
+      newState.focus = true;
+      return newState;
+    });
+  };
+
+  const handleBlur = e => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setDropdown(state => {
+        const newState = { ...state };
+        newState.focus = false;
+        return newState;
+      });
+    }
+  };
+
+  const handleClick = () => {
+    setDropdown(initialState);
+  };
+
+  const isVisibleDropdown = () => {
+    return dropdown.hover || dropdown.focus;
+  };
+
+  const linkClasses = `${styles.nav_link} ${className ? className : ""}`;
 
   return (
     <li
-      onMouseEnter={() => setIsVisibleDropdown(true)}
-      onMouseLeave={() => setIsVisibleDropdown(false)}
+      className={styles.link_wrapper}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
       <Link
-        id={id}
-        className={classes}
+        id={id ? id : ""}
+        className={linkClasses}
         href={url}
+        onClick={handleClick}
       >
         <span>{name}</span>
       </Link>
-      {dropdown}
+      {nestedLinks && isVisibleDropdown() && (
+        <Dropdown
+          links={nestedLinks}
+          onClick={handleClick}
+        />
+      )}
     </li>
   );
 }
