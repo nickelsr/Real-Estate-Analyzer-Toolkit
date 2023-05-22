@@ -1,0 +1,19 @@
+.container {
+  padding: 8px 0;
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 60px;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-top: 1px solid gray;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+}
+
+.row_left {
+  width: 100%;
+}
+
+.row_right {
+  width: 100%;
+}

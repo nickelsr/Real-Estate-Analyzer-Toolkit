@@ -1,0 +1,7 @@
+// Comments (while not valid JSON) in this file are ignored by Mocha
+// For more info, see "https://mochajs.org/#configuring-mocha-nodejs"
+{
+  "extension": ["ts"],
+  "spec": "src/**/*.spec.ts",
+  "require": "ts-node/register"
+}

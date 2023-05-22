@@ -1,7 +1,7 @@
 .breadcrumbs {
   padding: 8px;
   background-color: var(--clr-gray-bright);
-  border: 1px solid var(--clr-gray-charcoal-lt);
+  border-bottom: 1px solid var(--clr-gray-charcoal-lt);
 
   ul {
     list-style: none;
@@ -29,11 +29,11 @@
     background-color: black;
     transform: scaleX(0) scaleY(0.5);
     transform-origin: bottom left;
-    transition: transform 200ms ease-in-out;
+    transition: transform 150ms ease-in-out;
   }
 
   li:not(:first-child)::before {
-    content: "→";
+    content: "➝";
     color: var(--clr-gray-charcoal);
     padding: 0 16px;
   }

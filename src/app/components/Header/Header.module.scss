@@ -1,6 +1,5 @@
 .header {
-  position: sticky;
-  top: 0;
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   z-index: 1000;
