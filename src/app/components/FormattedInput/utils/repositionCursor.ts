@@ -48,8 +48,6 @@ export const repositionCursor = ({
   let newCursorPos = cursorPos || 0;
   let newInputValue = eventValue;
 
-  console.log("repositionCursor - eventValue =", eventValue);
-
   if (key && cursorPos) {
     const splitInputValue = inputValue.split("");
 

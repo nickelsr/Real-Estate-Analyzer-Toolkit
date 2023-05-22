@@ -31,7 +31,7 @@ export default function FormattedInput({
   }, [inputValue, cursorPos]);
 
   /**
-   *
+   * Verifies user input, reformats value and adjusts cursor position.
    */
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -42,7 +42,6 @@ export default function FormattedInput({
       setInputValue(value);
       setCursorPos(0);
     } else {
-      // BUG: allows user to enter comma separators
       const numericValue = removeSeparators(value);
       if (!isInt(numericValue)) return;
 
@@ -56,31 +55,9 @@ export default function FormattedInput({
         repositionCursorProps
       );
 
-      console.log(
-        "onChange - value =",
-        value,
-        "| newInputValue =",
-        newInputValue
-      );
-
       setInputValue(newInputValue);
       setCursorPos(newCursorPos);
     }
-  };
-
-  /**
-   * Sets the cursor position.
-   */
-  const handleOnFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    const {
-      target: { selectionStart },
-    } = event;
-
-    const newCursorPos = selectionStart || inputValue.length;
-
-    console.log("onFocus - newCursorPos =", newCursorPos);
-
-    setCursorPos(newCursorPos);
   };
 
   /**
@@ -103,8 +80,6 @@ export default function FormattedInput({
   const handleOnKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { key } = event;
 
-    console.log("onKeyDown. key =", key);
-
     setLastKeyPressed(key);
   };
 
@@ -119,7 +94,6 @@ export default function FormattedInput({
       inputMode="numeric"
       onChange={handleOnChange}
       onKeyDown={handleOnKeyDown}
-      onFocus={handleOnFocus}
       onBlur={handleOnBlur}
       className={className}
     />
