@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { toFormattedString } from "../toFormattedString";
 
-describe("addSeparators()", function () {
+describe("toFormattedString()", function () {
   const tests = [
     { input: "", expected: "" },
     { input: "1", expected: "1" },
@@ -18,7 +18,7 @@ describe("addSeparators()", function () {
   ];
 
   tests.forEach(({ input, expected }) => {
-    it(`Correctly separates string input of length ${input.length}`, function () {
+    it(`Correctly formats string input of length ${input.length}`, function () {
       expect(toFormattedString(input)).to.equal(expected);
     });
   });

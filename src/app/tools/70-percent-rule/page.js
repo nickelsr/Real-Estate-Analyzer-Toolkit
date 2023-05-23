@@ -71,10 +71,11 @@ export default function SeventyPercentRule() {
     const squareFeet = toInt(event.target[sqFt.name]?.value);
     const costPerFoot = toInt(event.target[CPF.name]?.value);
 
-    let renovations = squareFeet * costPerFoot;
-    let margin = 0.3 * afterRepairValue;
-    let maxAllowableOffer =
-      0.7 * afterRepairValue - renovations - extraProfitNeeded;
+    let renovations = Math.round(squareFeet * costPerFoot);
+    let margin = Math.round(0.3 * afterRepairValue);
+    let maxAllowableOffer = Math.round(
+      0.7 * afterRepairValue - renovations - extraProfitNeeded
+    );
 
     if (maxAllowableOffer < 0) {
       maxAllowableOffer = 0;

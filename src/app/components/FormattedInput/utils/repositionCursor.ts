@@ -54,7 +54,6 @@ export const repositionCursor = ({
     if (key === "Backspace" && inputValue[cursorPos] === ",") {
       splitInputValue.splice(cursorPos - 1, 1);
       newInputValue = splitInputValue.join("");
-      newCursorPos -= 1;
     } else if (key === "Delete" && inputValue[cursorPos] === ",") {
       splitInputValue.splice(cursorPos + 1, 1);
       newInputValue = splitInputValue.join("");
