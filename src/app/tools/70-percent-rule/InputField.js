@@ -1,4 +1,4 @@
-import FormattedInput from "@components/FormattedInput";
+import Input from "./Input";
 import Label from "./Label";
 import FieldDescription from "./FieldDescription";
 import styles from "./InputField.module.scss";
@@ -6,9 +6,9 @@ import styles from "./InputField.module.scss";
 export default function InputField({
   name,
   display,
-  tooltip,
-  isCurrency,
-  isMeasurement,
+  description,
+  prefix,
+  suffix,
   required,
   optional,
 }) {
@@ -18,17 +18,17 @@ export default function InputField({
         <Label
           name={name}
           display={display}
-          tooltip={tooltip}
           optional={optional}
         />
-        <FormattedInput
-          id={name}
+        <Input
           name={name}
+          prefix={prefix}
+          suffix={suffix}
           required={required}
         />
       </div>
       <div className={styles.row_right}>
-        <FieldDescription description={tooltip} />
+        <FieldDescription description={description} />
       </div>
     </div>
   );
