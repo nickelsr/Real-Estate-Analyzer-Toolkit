@@ -48,6 +48,8 @@ export const repositionCursor = ({
 }: RepositionCursorOptions): [string, number] => {
   let newCursorPos = cursorPos || 0;
   let unformattedNewInputValue = eventValue;
+  // used to reposition the cursor after formatting new input value
+  let leftOfChange = removeSeparators(eventValue.slice(0, newCursorPos));
 
   let unseparatedInputValue = removeSeparators(inputValue);
   let unseparatedEventValue = removeSeparators(eventValue);
@@ -59,20 +61,19 @@ export const repositionCursor = ({
     if (key === "Backspace" && inputValue[newCursorPos] === ",") {
       splitInputValue.splice(newCursorPos - 1, 1);
       unformattedNewInputValue = splitInputValue.join("");
+      leftOfChange = removeSeparators(eventValue.slice(0, newCursorPos - 1));
     } else if (key === "Delete" && inputValue[newCursorPos] === ",") {
       splitInputValue.splice(newCursorPos + 1, 1);
       unformattedNewInputValue = splitInputValue.join("");
-      newCursorPos += 1;
     }
   }
 
-  const preFormatLength = unformattedNewInputValue.length;
   const newInputValue = toFormattedString(unformattedNewInputValue);
-  const postFormatLength = newInputValue.length;
 
-  newCursorPos += postFormatLength - preFormatLength;
-  newCursorPos = Math.max(0, newCursorPos);
-  newCursorPos = Math.min(newInputValue.length, newCursorPos);
+  let i = 0;
+  for (newCursorPos = 0; i < leftOfChange.length; newCursorPos++) {
+    if (newInputValue[newCursorPos] !== ",") i++;
+  }
 
   return [newInputValue, newCursorPos];
 };

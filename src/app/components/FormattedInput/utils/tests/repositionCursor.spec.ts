@@ -43,7 +43,7 @@ describe("repositionCursor()", function () {
     };
 
     const expectedNewInputString = "1,345";
-    const expectedNewCursorPos = 2;
+    const expectedNewCursorPos = 1;
     expect(repositionCursor(options)).to.deep.equal([
       expectedNewInputString,
       expectedNewCursorPos,
@@ -91,7 +91,7 @@ describe("repositionCursor()", function () {
     };
 
     const expectedNewInputString = "12,345,789";
-    const expectedNewCursorPos = 7;
+    const expectedNewCursorPos = 6;
     expect(repositionCursor(options)).to.deep.equal([
       expectedNewInputString,
       expectedNewCursorPos,
