@@ -10,6 +10,7 @@
  * and "100" becomes "1,000").
  */
 
+import { removeSeparators } from "./removeSeparators";
 import { toFormattedString } from "./toFormattedString";
 
 export interface RepositionCursorOptions {
@@ -46,23 +47,27 @@ export const repositionCursor = ({
   key,
 }: RepositionCursorOptions): [string, number] => {
   let newCursorPos = cursorPos || 0;
-  let newInputValue = eventValue;
+  let unformattedNewInputValue = eventValue;
 
-  if (key && cursorPos) {
+  let unseparatedInputValue = removeSeparators(inputValue);
+  let unseparatedEventValue = removeSeparators(eventValue);
+
+  if (key && unseparatedEventValue === unseparatedInputValue) {
+    // a removed comma separator is the only difference
     const splitInputValue = inputValue.split("");
 
-    if (key === "Backspace" && inputValue[cursorPos] === ",") {
-      splitInputValue.splice(cursorPos - 1, 1);
-      newInputValue = splitInputValue.join("");
-    } else if (key === "Delete" && inputValue[cursorPos] === ",") {
-      splitInputValue.splice(cursorPos + 1, 1);
-      newInputValue = splitInputValue.join("");
+    if (key === "Backspace" && inputValue[newCursorPos] === ",") {
+      splitInputValue.splice(newCursorPos - 1, 1);
+      unformattedNewInputValue = splitInputValue.join("");
+    } else if (key === "Delete" && inputValue[newCursorPos] === ",") {
+      splitInputValue.splice(newCursorPos + 1, 1);
+      unformattedNewInputValue = splitInputValue.join("");
       newCursorPos += 1;
     }
   }
 
-  const preFormatLength = newInputValue.length;
-  newInputValue = toFormattedString(newInputValue);
+  const preFormatLength = unformattedNewInputValue.length;
+  const newInputValue = toFormattedString(unformattedNewInputValue);
   const postFormatLength = newInputValue.length;
 
   newCursorPos += postFormatLength - preFormatLength;
