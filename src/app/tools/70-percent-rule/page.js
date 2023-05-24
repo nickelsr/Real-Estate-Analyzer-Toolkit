@@ -4,39 +4,40 @@ import { useState, useRef } from "react";
 import InputField from "./InputField";
 import styles from "./page.module.scss";
 import OutputField from "./OutputField";
+import { toRawNumber } from "@components/FormattedInput";
 
 const ARV = {
   name: "afterRepairValue",
   display: "After Repair Value",
-  tooltip: `After Repair Value is the estimated market value of a property
+  description: `After Repair Value is the estimated market value of a property
     after planned renovations have been completed.`,
-  isCurrency: true,
+  prefix: "$",
   required: true,
 };
 const sqFt = {
   name: "squareFootage",
   display: "Property Size",
-  tooltip: "The size of the property in square feet.",
-  isMeasurement: true,
+  description: "The size of the property in square feet.",
+  suffix: "sq/ft",
   required: true,
 };
 const CPF = {
   name: "costPerFoot",
   display: "Cost / Square Foot",
-  tooltip: `Estimated cost per square foot for renovations. Generally
+  description: `Estimated cost per square foot for renovations. Generally
     between $10-$60 per sq/ft, depending on the scope of the
     renovation, but can be more expensive due to unexpected repairs or
     luxury materials are used.`,
-  isCurrency: "$",
+  prefix: "$",
   required: true,
 };
 const EPN = {
   name: "extraProfitNeeded",
   display: "Lender Interest",
-  tooltip: `If investment capital is attained through a lender, interest rates
+  description: `If investment capital is attained through a lender, interest rates
     can eat away at profit margins. Input the total estimated lender interest,
     which will be subtracted from the maximum allowable offer.`,
-  isCurrency: "$",
+  prefix: "$",
   optional: true,
 };
 const MAO = {
@@ -58,18 +59,13 @@ export default function SeventyPercentRule() {
   const [renovationCost, setRenovationCost] = useState("");
   const resultsRef = useRef();
 
-  function toInt(val) {
-    val = val.replaceAll(",", "");
-    return +val;
-  }
-
   function handleSubmitForm(event) {
     event.preventDefault();
 
-    const afterRepairValue = toInt(event.target[ARV.name]?.value);
-    const extraProfitNeeded = toInt(event.target[EPN.name]?.value);
-    const squareFeet = toInt(event.target[sqFt.name]?.value);
-    const costPerFoot = toInt(event.target[CPF.name]?.value);
+    const afterRepairValue = toRawNumber(event.target[ARV.name]?.value);
+    const extraProfitNeeded = toRawNumber(event.target[EPN.name]?.value);
+    const squareFeet = toRawNumber(event.target[sqFt.name]?.value);
+    const costPerFoot = toRawNumber(event.target[CPF.name]?.value);
 
     let renovations = Math.round(squareFeet * costPerFoot);
     let margin = Math.round(0.3 * afterRepairValue);
@@ -77,15 +73,16 @@ export default function SeventyPercentRule() {
       0.7 * afterRepairValue - renovations - extraProfitNeeded
     );
 
-    if (maxAllowableOffer < 0) {
+    if (maxAllowableOffer <= 0) {
       maxAllowableOffer = 0;
       renovations = 0;
       margin = 0;
     }
 
-    setMaxAllowableOffer(Math.round(maxAllowableOffer));
-    setRenovationCost(Math.round(renovations));
-    setMargin(Math.round(margin));
+    setMaxAllowableOffer(maxAllowableOffer);
+    setRenovationCost(renovations);
+    setMargin(margin);
+
     resultsRef.current.focus({ focusVisible: true });
   }
 
