@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Breadcrumbs() {
   const breadcrumbs = useBreadcrumbs();
 
-  if (breadcrumbs.length === 0) return;
+  if (breadcrumbs.length === 0) return <></>;
 
   return (
     <nav
