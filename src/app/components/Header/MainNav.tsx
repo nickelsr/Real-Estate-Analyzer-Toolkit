@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { navLinks } from "@app/config";
+import { mainNavLinks, loginNavLink, signupNavLink } from "./main-nav-links";
 import useNavDir from "@hooks/use-nav-dir";
 import MainNavLink from "./MainNavLink";
 import styles from "./MainNav.module.scss";
@@ -10,7 +10,7 @@ export default function MainNav() {
   const navDir = useNavDir();
 
   useEffect(() => {
-    let elem;
+    let elem: HTMLElement | null;
     elem = document.getElementById(`nav-link-${navDir}`);
     elem?.classList.add(styles["nav-active"]);
 
@@ -26,34 +26,22 @@ export default function MainNav() {
     >
       <div className={styles["nav-section"]}>
         <ul>
-          <MainNavLink
-            className={styles.nav_link}
-            id="home-logo"
-            name="Logo Placeholder"
-            url="/"
-          />
-          {navLinks.map(link => (
-            <MainNavLink
-              key={`nav-link-${link.url}`}
-              id={`nav-link-${link.url}`}
-              name={link.name}
-              url={link.url}
-              nestedLinks={link.nestedLinks}
-            />
+          {mainNavLinks.map(linkNode => (
+            <li key={linkNode.link.key}>
+              <MainNavLink linkNode={linkNode} />
+            </li>
           ))}
         </ul>
       </div>
       <div className={styles["nav-section"]}>
         <ul>
           <MainNavLink
-            className={`${styles.nav_link} ${styles.login}`}
-            name="Login"
-            url="/login"
+            linkNode={loginNavLink}
+            className={styles.login}
           />
           <MainNavLink
-            className={`${styles.nav_link} ${styles.signup}`}
-            name="Sign Up"
-            url="/sign-up"
+            linkNode={signupNavLink}
+            className={styles.signup}
           />
         </ul>
       </div>

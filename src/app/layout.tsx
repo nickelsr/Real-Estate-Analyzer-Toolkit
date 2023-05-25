@@ -1,17 +1,17 @@
 import Header from "./components/Header/Header";
 import "./globals.css";
-import { Pontano_Sans, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 
-const pontano_sans = Pontano_Sans({
-  subsets: ["latin"],
-  display: "swap",
-});
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
 
-export default function RootLayout({ children }) {
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={inter.className}>

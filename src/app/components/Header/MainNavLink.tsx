@@ -1,11 +1,23 @@
+import { useState } from "react";
 import Link from "next/link";
 import Dropdown from "./Dropdown";
+import { NavLinkNode } from "./main-nav-links";
 import styles from "./MainNavLink.module.scss";
-import { useState } from "react";
 
-const initialState = { hover: false, focus: false };
-export default function MainNavLink({ id, url, name, nestedLinks, className }) {
-  const [dropdown, setDropdown] = useState(initialState);
+export interface MainNavLinkProps {
+  linkNode: NavLinkNode;
+  className?: string;
+}
+
+const initialDropdownState = { hover: false, focus: false };
+
+export default function MainNavLink({ linkNode, className }: MainNavLinkProps) {
+  const {
+    link: { name, url, id },
+    nestedLinks,
+  } = linkNode;
+
+  const [dropdown, setDropdown] = useState(initialDropdownState);
 
   const handleMouseEnter = () => {
     setDropdown(state => {
@@ -31,7 +43,7 @@ export default function MainNavLink({ id, url, name, nestedLinks, className }) {
     });
   };
 
-  const handleBlur = e => {
+  const handleBlur = (e: React.FocusEvent) => {
     if (!e.currentTarget.contains(e.relatedTarget)) {
       setDropdown(state => {
         const newState = { ...state };
@@ -42,17 +54,19 @@ export default function MainNavLink({ id, url, name, nestedLinks, className }) {
   };
 
   const handleClick = () => {
-    setDropdown(initialState);
+    setDropdown(initialDropdownState);
   };
 
   const isVisibleDropdown = () => {
     return dropdown.hover || dropdown.focus;
   };
 
+  const dropdownId = `${id}-dropdown`;
+
   const linkClasses = `${styles.nav_link} ${className ? className : ""}`;
 
   return (
-    <li
+    <div
       className={styles.link_wrapper}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -60,7 +74,7 @@ export default function MainNavLink({ id, url, name, nestedLinks, className }) {
       onBlur={handleBlur}
     >
       <Link
-        id={id ? id : ""}
+        id={id}
         className={linkClasses}
         href={url}
         onClick={handleClick}
@@ -69,10 +83,11 @@ export default function MainNavLink({ id, url, name, nestedLinks, className }) {
       </Link>
       {nestedLinks && isVisibleDropdown() && (
         <Dropdown
+          id={dropdownId}
           links={nestedLinks}
           onClick={handleClick}
         />
       )}
-    </li>
+    </div>
   );
 }

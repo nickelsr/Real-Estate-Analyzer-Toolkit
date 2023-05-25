@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { NavLink } from "./main-nav-links";
 import styles from "./Dropdown.module.scss";
 
-export default function Dropdown({ links, id, onClick }) {
+interface DropdownProps {
+  id: string;
+  links: NavLink[];
+  onClick: React.MouseEventHandler<HTMLAnchorElement>;
+}
+
+export default function Dropdown({ links, id, onClick }: DropdownProps) {
   return (
     <div
       id={id}
