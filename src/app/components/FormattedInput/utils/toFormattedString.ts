@@ -4,7 +4,9 @@ import { splitLeadingZeros } from "./splitLeadingZeros";
 /**
  * Adds thousands separators (commas) to a string.
  */
-export const toFormattedString = (value: string): string => {
+export const toFormattedString = (value: string | number): string => {
+  if (typeof value === "number") value = value.toString();
+
   const unseparatedValue = removeSeparators(value);
   const [leadingZeros, cleanValue] = splitLeadingZeros(unseparatedValue);
   const splitValue: string[] = cleanValue.split("");
