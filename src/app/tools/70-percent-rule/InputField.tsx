@@ -3,6 +3,16 @@ import Label from "./Label";
 import FieldDescription from "./FieldDescription";
 import styles from "./InputField.module.scss";
 
+export type InputFieldProps = {
+  name: string;
+  display: string;
+  description: string;
+  prefix?: string;
+  suffix?: string;
+  required?: boolean;
+  optional?: boolean;
+};
+
 export default function InputField({
   name,
   display,
@@ -11,7 +21,7 @@ export default function InputField({
   suffix,
   required,
   optional,
-}) {
+}: InputFieldProps) {
   return (
     <div className={styles.container}>
       <div className={styles.row_left}>

@@ -6,7 +6,7 @@ type InputProps = {
   name: string;
   prefix?: string;
   suffix?: string;
-  required: boolean;
+  required?: boolean;
 };
 
 export default function Input({
@@ -15,16 +15,18 @@ export default function Input({
   suffix,
   required = false,
 }: InputProps) {
+  const formattedInputProps: FormattedInputProps = {
+    className: "text-field",
+    id: name,
+    name,
+    required,
+  };
+
   return (
     <div className="text-field-wrapper">
       {prefix && <span className="text-field-prefix">{prefix}</span>}
       {suffix && <span className="text-field-suffix">{suffix}</span>}
-      <FormattedInput
-        className="text-field"
-        id={name}
-        name={name}
-        required={required}
-      />
+      <FormattedInput {...formattedInputProps} />
     </div>
   );
 }
