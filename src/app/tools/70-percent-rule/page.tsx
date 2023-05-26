@@ -1,41 +1,7 @@
-"use client";
-
-import { useState } from "react";
-import Form, { FormProps } from "./Form";
-import Result, { ResultProps } from "./Result";
+import Form from "./Form";
 import styles from "./page.module.scss";
 
-export interface FormSubmission {
-  maxAllowableOffer: string;
-  margin: string;
-  repairCost: string;
-}
-
 export default function SeventyPercentRule() {
-  const [maxAllowableOffer, setMaxAllowableOffer] = useState("");
-  const [margin, setMargin] = useState("");
-  const [repairCost, setRepairCost] = useState("");
-
-  const onSubmit = ({
-    maxAllowableOffer,
-    margin,
-    repairCost,
-  }: FormSubmission) => {
-    setMaxAllowableOffer(maxAllowableOffer);
-    setRepairCost(margin);
-    setMargin(repairCost);
-  };
-
-  const formProps: FormProps = {
-    onSubmitCallback: onSubmit,
-  };
-
-  const resultProps: ResultProps = {
-    maxAllowableOffer,
-    repairCost,
-    margin,
-  };
-
   return (
     <div className="page-wrapper">
       <div className={styles.page}>
@@ -51,8 +17,7 @@ export default function SeventyPercentRule() {
             market fluctuation, and <b>profit</b>.
           </p>
         </div>
-        <Form {...formProps} />
-        <Result {...resultProps} />
+        <Form />
       </div>
     </div>
   );
