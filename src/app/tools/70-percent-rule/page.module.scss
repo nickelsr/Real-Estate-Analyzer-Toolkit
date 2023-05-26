@@ -16,27 +16,3 @@
   max-width: 550px;
   margin: 0 auto;
 }
-
-.form {
-  max-width: 60rem;
-  margin: 32px auto;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  row-gap: 3rem;
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
-}
-
-@media screen and (max-width: 48rem) {
-  .form {
-    display: block;
-  }
-}
-
-.result_container {
-  display: flex;
-  flex-flow: row nowrap;
-  column-gap: 32px;
-  justify-content: center;
-}
