@@ -33,6 +33,12 @@ export const mainNavLinks: NavLinkNode[] = [
         id: "nav-link-tools-70-percent-rule",
         key: "f10187c3-d5b7-4371-8af4-ec40090548f0",
       },
+      {
+        name: "Fix and Flip",
+        url: "/tools/fix-and-flip",
+        id: "nav-link-tools-fix-and-flip",
+        key: "a953d405-b291-441d-9754-a247ad1f9791",
+      },
     ],
   },
 ];
