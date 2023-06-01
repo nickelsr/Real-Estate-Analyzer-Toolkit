@@ -42,7 +42,7 @@ After completing the following steps, the development container will be created,
 Unit tests are written with Mocha/Chai. After setting up the development environment, execute the following command from the projects root directory:
 
 ```
-next run test
+npm run test
 ```
 
 
