@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useClickedOutside, usePressedEscape } from "@hooks";
 import InfoIcon from "@public/info-icon.svg";
 import styles from "./Popover.module.scss";
 
@@ -10,27 +11,42 @@ interface PopoverProps {
 
 export default function Popover({ info }: PopoverProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const hidePopover = () => {
+    setIsVisible(false);
+  };
+
+  useClickedOutside(containerRef, isVisible, hidePopover);
+  usePressedEscape(isVisible, hidePopover);
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.focus();
+    // show and focus on popover
+    if (isVisible) {
+      popoverRef.current?.classList.add(styles.visible);
+      popoverRef.current?.focus();
     }
+
+    return () => {
+      popoverRef.current?.classList.remove(styles.visible);
+    };
   }, [isVisible]);
 
   const handleOnKeyUp = (event: React.KeyboardEvent) => {
     if (event.key === " " || event.key === "Enter") {
       setIsVisible(state => !state);
     }
-    if (event.key === "Escape") {
-      setIsVisible(false);
-    }
+  };
+
+  const handleOnClick = (event: React.MouseEvent) => {
+    setIsVisible(state => !state);
   };
 
   const popover_info = isVisible ? (
     <div className={styles.info_wrapper}>
       <div
-        ref={ref}
+        ref={popoverRef}
         tabIndex={0}
         className={styles.info}
       >
@@ -43,11 +59,12 @@ export default function Popover({ info }: PopoverProps) {
 
   return (
     <div
-      tabIndex={0}
       className={styles.container}
+      ref={containerRef}
     >
       <InfoIcon
-        onClick={() => setIsVisible(state => !state)}
+        tabIndex={0}
+        onClick={handleOnClick}
         onKeyUp={handleOnKeyUp}
         className={styles.icon}
       />
