@@ -18,8 +18,8 @@ export default function Popover({ info }: PopoverProps) {
     setIsVisible(false);
   };
 
-  useClickedOutside(containerRef, isVisible, hidePopover);
-  usePressedEscape(isVisible, hidePopover);
+  useClickedOutside(containerRef, hidePopover, isVisible);
+  usePressedEscape(hidePopover, isVisible);
 
   useEffect(() => {
     // show and focus on popover
