@@ -1,12 +1,13 @@
-import Input from "./Input";
-import Label from "./Label";
-import FieldDescription from "./FieldDescription";
+import Popover from "@/app/components/UI/Popover/Popover";
+import FormattedInput, {
+  FormattedInputProps,
+} from "@components/FormattedInput";
 import styles from "./InputField.module.scss";
 
 export type InputFieldProps = {
   name: string;
-  display: string;
-  description: string;
+  label: string;
+  description?: string;
   prefix?: string;
   suffix?: string;
   required?: boolean;
@@ -15,30 +16,41 @@ export type InputFieldProps = {
 
 export default function InputField({
   name,
-  display,
+  label,
   description,
   prefix,
   suffix,
-  required,
   optional,
+  required = false,
 }: InputFieldProps) {
+  const formattedInputProps: FormattedInputProps = {
+    className: "text-field",
+    id: name,
+    name,
+    required,
+  };
+
+  const labelClasses = `${styles.label} ${optional ? styles.optional : ""}`;
+
   return (
     <div className={styles.container}>
-      <div className={styles.row_left}>
-        <Label
-          name={name}
-          display={display}
-          optional={optional}
-        />
-        <Input
-          name={name}
-          prefix={prefix}
-          suffix={suffix}
-          required={required}
-        />
+      <div className={styles.label_container}>
+        <label
+          htmlFor={name}
+          className={labelClasses}
+        >
+          {label}
+        </label>
+        {description && (
+          <div className={styles.popover_wrapper}>
+            <Popover info={description} />
+          </div>
+        )}
       </div>
-      <div className={styles.row_right}>
-        <FieldDescription description={description} />
+      <div className="text-field-wrapper">
+        {prefix && <span className="text-field-prefix">{prefix}</span>}
+        {suffix && <span className="text-field-suffix">{suffix}</span>}
+        <FormattedInput {...formattedInputProps} />
       </div>
     </div>
   );

@@ -2,3 +2,9 @@
   display: flex;
   flex-flow: column nowrap;
 }
+
+.label {
+  margin-bottom: 8px;
+  color: var(--clr-gray-charcoal);
+  font-weight: 600;
+}
