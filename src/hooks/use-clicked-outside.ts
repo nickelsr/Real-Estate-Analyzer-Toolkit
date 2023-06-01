@@ -6,30 +6,19 @@ function assertIsNode(event: EventTarget | null): asserts event is Node {
   }
 }
 
-interface useClickedOutsideProps {
-  /**
-   * A ref to the DOM element that the click event target will be tested
-   * against.
-   */
-  ref: RefObject<HTMLDivElement> | null;
-
-  /**
-   * When truthy, signals the hook to add the event listener.
-   * Defaults to true (adds the event listener immediately).
-   */
-  dependency?: any;
-
-  /**
-   * Called when the event listener is active and the "Escape" key is pressed.
-   */
-  callback: CallableFunction;
-}
-
-export default function useClickedOutside({
-  ref,
-  dependency = true,
-  callback,
-}: useClickedOutsideProps) {
+/**
+ * Registers a "mousedown" event listener and calls the provided callback
+ * function when a click occurs outside of the provided ref element.
+ *
+ * @param ref - The DOM element that needs to watch for outside clicks.
+ * @param callback - Called following a click outside of the ref element.
+ * @param willReg - When truthy, the event listener will be registered.
+ */
+export default function useClickedOutside(
+  ref: RefObject<HTMLDivElement> | null,
+  callback: CallableFunction,
+  willReg: any = true
+) {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       assertIsNode(event.target);
@@ -38,16 +27,12 @@ export default function useClickedOutside({
       }
     }
 
-    if (
-      dependency !== undefined &&
-      dependency !== null &&
-      dependency != false
-    ) {
+    if (willReg !== undefined && willReg !== null && willReg != false) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [ref, dependency]);
+  }, [ref, willReg]);
 }
