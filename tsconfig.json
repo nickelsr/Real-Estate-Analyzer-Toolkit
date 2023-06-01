@@ -22,8 +22,9 @@
       "@styles/*": ["./src/styles/*"],
       "@animations/*": ["./src/styles/animations/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@hooks": ["./src/hooks"],
       "@public/*": ["./public/*"],
-      "@store": ["./src/store"]
+      "@redux/*": ["./src/redux/*"]
     },
     "plugins": [
       {
