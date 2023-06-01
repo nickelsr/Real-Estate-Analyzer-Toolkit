@@ -4,7 +4,7 @@
 
 ## Description
 
-This repository hosts the code that drives a web application used for real estate investment calculations. You can visit the website [here](real-estate-calculator-umber.vercel.app). This application is meant to serve as a **FOSS** alternative to other real estate investment web apps that charge monthly subscription fees. The source code is available to everyone under the standard [MIT license](https://github.com/nickelsr/Real-Estate-Calculator/blob/main/LICENSE.txt).
+This repository hosts the code that drives a web application used for real estate investment calculations. You can visit the website [here](https://real-estate-calculator-umber.vercel.app/). This application is meant to serve as a **FOSS** alternative to other real estate investment web apps that charge monthly subscription fees. The source code is available to everyone under the standard [MIT license](https://github.com/nickelsr/Real-Estate-Calculator/blob/main/LICENSE.txt).
 
 
 ## Features Under Development
