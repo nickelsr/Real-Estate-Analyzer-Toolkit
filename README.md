@@ -1,5 +1,5 @@
 <!-- prettier-ignore-start -->
-# Real Estate Analyzer Toolkit
+# Real Estate Analyzer Toolkit Client
 
 
 ## Description
